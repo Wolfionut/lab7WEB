@@ -8,7 +8,7 @@
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-        <title>Build a CRUD App with Node.js and MongoDB</title>
+        <title>StudApp</title>
     </head>
     <body>
         
@@ -31,6 +31,7 @@
                                     <th>Nume</th>
                                     <th>Email</th>
                                     <th>Varsta</th>
+                                    <th>Proiecte</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -72,6 +73,10 @@ function makeModal(title, button_value, callback)
                         <div class="mb-3">
                             <label>Age</label>
                             <input type="number" name="age" id="age" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label>Projects</label>
+                            <input type="projects" name="projects" id="projects" class="form-control" />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -134,7 +139,7 @@ function getData(){
                     <td>${row.name}</td>
                     <td>${row.email}</td>
                     <td>${row.age}</td>
-                    <td>
+                    <td>${row.projects} <td>
                         <button type="button" class="btn btn-warning btn-sm" onclick="fetchSingleData('${row._id}')">Edit</button>
                         <button type="button" class="btn btn-danger btn-sm" onclick="deleteData('${row._id}')">Delete</button>
                     </td>
@@ -158,6 +163,7 @@ function fetchSingleData(id){
         document.getElementById('name').value = data.name;
         document.getElementById('email').value = data.email;
         document.getElementById('age').value = data.age;
+        document.getElementById('projects').value = data.projects;
         document.getElementById('user_id').value = data._id;
     });
 }
@@ -187,7 +193,7 @@ function editData(){
 }
 
 function deleteData(id){
-    if(confirm("Are you sure you want to delete this?")){
+    if(confirm("Esti sigur ca vrei sa stergi utilizatorul?")){
         fetch(`/users/${id}`, {
             method : 'DELETE',
             headers : {

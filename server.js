@@ -22,7 +22,8 @@ connect.once('open', () => {
 const userSchema = new mongoose.Schema({
     name : String,
     email : String,
-    age : Number
+    age : Number,
+    projects:String
 });
 
 const User = mongoose.model('User', userSchema);
@@ -35,7 +36,8 @@ app.post('/users', async (request, response) => {
     const user = new User({
         name : request.body.name,
         email : request.body.email,
-        age : request.body.age
+        age : request.body.age,
+        projects : request.body.projects
     });
     const newItem = await user.save();
     response.status(201).json({scuccess:true});
@@ -58,6 +60,7 @@ app.put('/users/:id', async (request, response) => {
     user.name = request.body.name;
     user.email = request.body.email;
     user.age = request.body.age;
+    user.projects = request.body.projects;
     const updatedItem = await user.save();
     response.status(200).json(updatedItem);
 });
